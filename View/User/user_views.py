@@ -11,7 +11,6 @@ from app.decorators import token_required
 class HelloWorldInputs(Inputs):
     json = [JsonSchema(schema=schema)]
 
-
 @token_required
 def hello_world():
 
@@ -42,3 +41,4 @@ def edit_profile():
         query = 'select getdate();'
         result = query_mssql(query)  # this function gets a query, executes in mssql and returns the result
         return jsonify(result)
+
