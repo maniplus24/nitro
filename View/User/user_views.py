@@ -22,3 +22,5 @@ def hello_world():
 
         query = 'select getdate();'
         return jsonify(query_mssql(query))
+
+# tst1
