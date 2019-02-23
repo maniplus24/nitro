@@ -11,7 +11,6 @@ from app.schemas import schema
 class HelloWorldInputs(Inputs):
     json = [JsonSchema(schema=schema)]
 
-
 @token_required
 def hello_world():
 
