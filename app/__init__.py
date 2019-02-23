@@ -5,12 +5,16 @@ from flask import Flask
 
 import jwt
 
+from View.Billing.routes import init_billing_routes
+from View.User.routes import init_user_routes
 from app.routes import init_api_routes
 from instance.config import BaseConfig
 
 api = Flask(__name__)
 
 init_api_routes(api)
+init_billing_routes(api)
+init_user_routes(api)
 
 secret_key = BaseConfig.SECRET_KEY
 
