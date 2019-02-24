@@ -2,6 +2,8 @@ from functools import wraps
 
 import jwt
 from flask import jsonify, request
+from flask_inputs import Inputs
+from flask_inputs.validators import JsonSchema
 
 from instance.config import BaseConfig
 
@@ -21,3 +23,21 @@ def token_required(f):
             return jsonify({"Error": "Invalid Token"})
         return f(*args, **kwargs)
     return wrapper
+
+
+def validate_schema(schema_name):
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kw):
+
+            class ValidateInputs(Inputs):
+                json = [JsonSchema(schema=schema_name)]
+
+            inputs = ValidateInputs(request)
+
+            if not inputs.validate():
+                return jsonify(success=False, errors=inputs.errors)
+
+            return f(*args, **kw)
+        return wrapper
+    return decorator

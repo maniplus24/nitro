@@ -2,21 +2,20 @@ import datetime
 
 from flask import Flask
 
-
 import jwt
 
-from View.Billing.routes import init_billing_routes
-from View.User.routes import init_user_routes
+from View.Billing.billing_views import billing_blueprint
+from View.User.user_views import user_blueprint
 from app.routes import init_api_routes
 from instance.config import BaseConfig
 
 api = Flask(__name__)
 
-init_api_routes(api)
-init_billing_routes(api)
-init_user_routes(api)
 
 secret_key = BaseConfig.SECRET_KEY
+
+api.register_blueprint(user_blueprint)
+api.register_blueprint(billing_blueprint)
 
 
 @api.route('/login', methods=['GET'])
