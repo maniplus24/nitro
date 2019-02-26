@@ -22,6 +22,7 @@ def hello_world():
 def edit_profile():
 
     query = 'select getdate();'
-    result = query_mssql(query)  # this function gets a query, executes in mssql and returns the result
+    query1 = 'Base_User_Get @GetType=AllUsers'
+    result = query_mssql(query1)  # this function gets a query, executes in mssql and returns the result
     return jsonify(result)
 
